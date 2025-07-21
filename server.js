@@ -60,12 +60,10 @@ app.use(express.static('public'))
 // })
 
 app.get('/', (req, res) => {
-  res.render('home.ejs', {
-    name: restaurant.name,
-    address: restaurant.price,
-    phone: restaurant.rating,
-  })
+  res.render('home.ejs', {restaurant: restaurant})
 })
+
+
 app.get('/', (req, res) => {
   res.render('home.ejs', {
     name: restaurant.name,
@@ -76,19 +74,18 @@ app.get('/', (req, res) => {
 
 app.get('/menu', (req, res) => {
   console.log(restaurant.menu)
-  res.render('menu.ejs', { menu: restaurant.menu })
+  res.render('menu.ejs', { menu: restaurant.menu})
 })
 
-app.get('/menu:category', (req, res) => {
-
-  const category = req.params.category
-  const menu = restaurant.menu
+app.get('/menu/:category', (req, res) => {
   menuItems = []
-  items =restaurant.menu.filter((menuItems)=>{
-    return menuItems.category == req.params.category
+  const category = req.params.category
+  const filterMenu = restaurant.menu.filter((item)=>{
+    return item.category == req.params.category
   })
-    res.render('/menu:category', menuItems)
+  res.render('category.ejs', {filterMenu, category})
   })
+  
 
 
 // port
