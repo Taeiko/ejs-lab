@@ -64,14 +64,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.get('/', (req, res) => {
-  res.render('home.ejs', {
-    name: restaurant.name,
-    address: restaurant.address,
-    phone: restaurant.phone,
-  })
-})
-
 app.get('/menu', (req, res) => {
   console.log(restaurant.menu)
   res.render('menu.ejs', { menu: restaurant.menu})
